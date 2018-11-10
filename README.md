@@ -1,2 +1,2 @@
 # BooksApp
-Online Books management application powered by Django in backend and React in Frontend
+Online Books management application powered by Django in Backend and React in Frontend
