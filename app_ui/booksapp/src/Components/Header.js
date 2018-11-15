@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
+import BooksSearch from './BooksSearch'
 import { withRouter } from 'react-router-dom'
-import { Menu, Search, Icon } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 class Header extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Header extends Component {
                     onClick={this.toggleTab} />
                 <Menu.Menu position='right'>
                     <Menu.Item>
-                        <Search />
+                        <BooksSearch />
                     </Menu.Item>
                     <Menu.Item>
                         <Icon name="log out" />

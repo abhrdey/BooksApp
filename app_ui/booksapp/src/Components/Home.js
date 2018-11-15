@@ -1,7 +1,14 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Container, Grid } from 'semantic-ui-react'
 import HomeFilters from './HomeFilters'
 import HomeContent from './HomeContent'
+
+const mapStateToProps = state => {
+    return {
+        ...state
+    }
+}
 
 class Home extends Component {
     render() {
@@ -17,7 +24,7 @@ class Home extends Component {
                         <HomeFilters />
                     </Grid.Column>
                     <Grid.Column width={13}>
-                        <HomeContent />
+                        <HomeContent searchData={this.props.searchResults} />
                     </Grid.Column>
                 </Grid>
             </Container>
@@ -25,4 +32,4 @@ class Home extends Component {
     }
 }
 
-export default Home
+export default connect(mapStateToProps)(Home)
