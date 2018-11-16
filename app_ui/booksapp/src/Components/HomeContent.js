@@ -31,14 +31,14 @@ class HomeContent extends Component {
                     let thumbnail = pagemap["cse_thumbnail"][0]
                     let thumbnailLink = thumbnail["src"]
                     let columnData = (
-                        <Grid.Column>
+                        <Grid.Column key={start_index}>
                             <Image src={thumbnailLink} />
                         </Grid.Column>
                     )
                     rowData.push(columnData)
                 }
                 let rowNode = (
-                    <Grid.Row columns={4}>
+                    <Grid.Row key={index} columns={4}>
                         {rowData}
                     </Grid.Row>
                 )
