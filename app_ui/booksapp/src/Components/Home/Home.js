@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Container, Grid } from 'semantic-ui-react'
 import HomeFilters from './HomeFilters'
 import HomeContent from './HomeContent'
-import SearchModal from '../Search/SearchModal'
+import SearchContainer from '../Search/SearchContainer'
 
 const mapStateToProps = state => {
     return {
@@ -25,10 +25,10 @@ class Home extends Component {
                         <HomeFilters />
                     </Grid.Column>
                     <Grid.Column width={13}>
-                        <HomeContent searchData={this.props.searchResults} />
+                        <HomeContent />
                     </Grid.Column>
                 </Grid>
-                <SearchModal />
+                <SearchContainer />
             </Container>
         )
     }
