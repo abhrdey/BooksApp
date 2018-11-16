@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import logo from './logo.svg';
-import Home from './Components/Home'
+import Home from './Components/Home/Home'
 import Header from './Components/Header'
-import Dropbox from './Components/Dropbox'
+import Dropbox from './Components/Dropbox/Dropbox'
 import './App.css';
 
 class App extends Component {
