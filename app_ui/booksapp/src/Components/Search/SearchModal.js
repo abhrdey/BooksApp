@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import BooksSearch from '../BooksSearch'
 import { Modal, Grid, Image, Button } from 'semantic-ui-react'
 
 class SearchModal extends Component {
@@ -10,6 +11,10 @@ class SearchModal extends Component {
         }
         let columnStyle = {
             "marginLeft": "10px"
+        }
+        let paginationButtonStyle = {
+            "position": "relative",
+            "left": "60rem"
         }
         let searchData = this.props.searchData
         let booksList = []
@@ -41,11 +46,20 @@ class SearchModal extends Component {
         }
         return (
             <Modal open={this.props.showModal} size="large">
-                <Modal.Header>Search Books</Modal.Header>
+                <Modal.Header>
+                    Search Books
+                    <div style={{"display": "inline-flex", "marginLeft": "40rem"}}>
+                        <BooksSearch />
+                    </div>
+                </Modal.Header>
                 <Modal.Content>
                     {booksList}
+                    <div style={paginationButtonStyle}>
+                        <Button basic color="green">Previous</Button>
+                        <Button basic color="green" style={{"marginLeft": "5px"}}>Next</Button>
+                    </div>
                 </Modal.Content>
-                <Modal.Content>
+                <Modal.Content style={{"borderTop": "1px solid rgba(34,36,38,.15)"}}>
                     <Button color="green" onClick={this.props.closeModal}>Close</Button>
                 </Modal.Content>
             </Modal>

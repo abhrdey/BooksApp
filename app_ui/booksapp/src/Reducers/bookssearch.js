@@ -1,16 +1,22 @@
 
-import SET_BOOK_SEARCH_DATA from '../Constants/ActionNames'
+import actionConstants from '../Constants/ActionNames'
 
 const initialState = {
-    searchResults: undefined
+    searchResults: undefined,
+    searchPrefix: undefined
 }
 
 export default (state=initialState, action) => {
     switch(action.type) {
-        case SET_BOOK_SEARCH_DATA:
+        case actionConstants.SET_BOOK_SEARCH_DATA:
             return {
                 ...state,
                 searchResults: action.payload
+            }
+        case actionConstants.SET_BOOK_SEARCH_PREFIX:
+            return {
+                ...state,
+                searchPrefix: action.payload
             }
         default:
             return state

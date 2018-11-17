@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Search } from 'semantic-ui-react'
 import request from 'superagent'
 import { connect } from 'react-redux'
-import SET_BOOK_SEARCH_DATA from '../Constants/ActionNames'
+import actionConstants from '../Constants/ActionNames'
 
 const mapStateToProps = state => {
     return {
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setSearchResults: (payload) => dispatch({type: SET_BOOK_SEARCH_DATA, payload: payload})
+        setSearchResults: (payload) => dispatch({type: actionConstants.SET_BOOK_SEARCH_DATA, payload: payload}),
+        setSearchPrefix: (payload) => dispatch({type: actionConstants.SET_BOOK_SEARCH_PREFIX, payload: payload})
     }
 }
 
@@ -21,7 +22,7 @@ class BooksSearch extends Component {
         super(props)
 
         this.state = {
-            searchPrefix: undefined
+            searchPrefix: this.props.searchPrefix?this.props.searchPrefix:undefined
         }
     }
 
@@ -33,6 +34,7 @@ class BooksSearch extends Component {
 
     handleKeyPress = (event) => {
         if (event.key === "Enter") {
+            this.props.setSearchPrefix(this.state.searchPrefix)
             request.get("http://localhost:8000/booksApp/search").query({ 'data': this.state.searchPrefix }).then(response => {
                 console.log(response)
                 if (response["status"] === 200) {
@@ -45,7 +47,11 @@ class BooksSearch extends Component {
 
     render() {
         return (
-            <Search onSearchChange={this.handleSearchChange} onKeyPress={this.handleKeyPress} />
+            <Search
+                onSearchChange={this.handleSearchChange} 
+                onKeyPress={this.handleKeyPress} 
+                showNoResults={false} 
+                value={this.state.searchPrefix} />
         )
     }
 }

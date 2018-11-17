@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BooksSearch from './BooksSearch'
+import './Header.css'
 import { withRouter } from 'react-router-dom'
 import { Menu, Icon } from 'semantic-ui-react'
 
