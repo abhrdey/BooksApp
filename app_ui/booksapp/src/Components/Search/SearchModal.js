@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BooksSearch from '../BooksSearch'
+import SearchThumbnail from '../Thumbnail/SearchThumbnail'
 import { Modal, Grid, Image, Button } from 'semantic-ui-react'
 
 class SearchModal extends Component {
@@ -27,11 +28,13 @@ class SearchModal extends Component {
                 for (let start_index=index; ((start_index<(index+3))&&(start_index<numberBooks)); start_index++) {
                     let data = searchData[start_index]
                     let pagemap = data["pagemap"]
+                    let title = data["title"]
                     let thumbnail = pagemap["cse_thumbnail"][0]
                     let thumbnailLink = thumbnail["src"]
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
-                            <Image src={thumbnailLink} />
+                            {/* <Image src={thumbnailLink} /> */}
+                            <SearchThumbnail imageLink={thumbnailLink} title={title} />
                         </Grid.Column>
                     )
                     rowData.push(columnData)
