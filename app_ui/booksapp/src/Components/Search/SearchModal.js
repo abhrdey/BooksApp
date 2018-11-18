@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 import BooksSearch from '../BooksSearch'
 import SearchThumbnail from '../Thumbnail/SearchThumbnail'
-import { Modal, Grid, Image, Button } from 'semantic-ui-react'
+import { Modal, Grid, Image, Button, Icon } from 'semantic-ui-react'
 
 class SearchModal extends Component {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            setSelectAll: false
+        }
+    }
+
+    toggleSelectAll = () => {
+        this.setState({
+            setSelectAll: !this.state.setSelectAll
+        })
+    }
     render() {
         let rowStyle = {
             "display": "inline-flex",
@@ -16,6 +29,17 @@ class SearchModal extends Component {
         let paginationButtonStyle = {
             "position": "relative",
             "left": "60rem"
+        }
+        let selectAllButtonStyle = {
+            "marginBottom": "10px",
+            "position": "relative",
+            "left": "63rem"
+        }
+        let closeIconStyle = {
+            "position": "relative",
+            "top": "1rem",
+            "right": "-2rem",
+            "cursor": "pointer"
         }
         let searchData = this.props.searchData
         let booksList = []
@@ -34,7 +58,7 @@ class SearchModal extends Component {
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
                             {/* <Image src={thumbnailLink} /> */}
-                            <SearchThumbnail imageLink={thumbnailLink} title={title} />
+                            <SearchThumbnail imageLink={thumbnailLink} title={title} setSelectAll={this.state.setSelectAll} />
                         </Grid.Column>
                     )
                     rowData.push(columnData)
@@ -53,9 +77,15 @@ class SearchModal extends Component {
                     Search Books
                     <div style={{"display": "inline-flex", "marginLeft": "40rem"}}>
                         <BooksSearch />
+                        <div style={closeIconStyle} onClick={this.props.closeModal}>
+                            <Icon name="close" />
+                        </div>
                     </div>
                 </Modal.Header>
                 <Modal.Content>
+                    <div style={selectAllButtonStyle}>
+                        <Button basic color="blue" onClick={this.toggleSelectAll}>Select All</Button>
+                    </div>
                     {booksList}
                     <div style={paginationButtonStyle}>
                         <Button basic color="green">Previous</Button>
@@ -63,7 +93,7 @@ class SearchModal extends Component {
                     </div>
                 </Modal.Content>
                 <Modal.Content style={{"borderTop": "1px solid rgba(34,36,38,.15)"}}>
-                    <Button color="green" onClick={this.props.closeModal}>Close</Button>
+                    <Button color="red">Save</Button>
                 </Modal.Content>
             </Modal>
         )
