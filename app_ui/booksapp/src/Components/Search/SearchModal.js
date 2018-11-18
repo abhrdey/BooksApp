@@ -33,7 +33,7 @@ class SearchModal extends Component {
         let selectAllButtonStyle = {
             "marginBottom": "10px",
             "position": "relative",
-            "left": "63rem"
+            "left":  this.state.setSelectAll?"62rem":"63rem"
         }
         let closeIconStyle = {
             "position": "relative",
@@ -84,7 +84,9 @@ class SearchModal extends Component {
                 </Modal.Header>
                 <Modal.Content>
                     <div style={selectAllButtonStyle}>
-                        <Button basic color="blue" onClick={this.toggleSelectAll}>Select All</Button>
+                        <Button basic color="blue" onClick={this.toggleSelectAll}>
+                            {this.state.setSelectAll?"Deselect All":"Select All"}
+                        </Button>
                     </div>
                     {booksList}
                     <div style={paginationButtonStyle}>
