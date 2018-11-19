@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BooksSearch from '../BooksSearch'
 import SearchThumbnail from '../Thumbnail/SearchThumbnail'
-import { Modal, Grid, Image, Button, Icon } from 'semantic-ui-react'
+import { Modal, Grid, Image, Button, Icon, Dimmer, Loader } from 'semantic-ui-react'
 
 class SearchModal extends Component {
     constructor(props) {
@@ -51,6 +51,18 @@ class SearchModal extends Component {
         })
     }
 
+    submitSelectedBooksData = () => {
+        let booksMap = this.state.booksMap
+        let searchData = this.state.searchData
+        let selectedData = []
+
+        for (let index=0; index<searchData.length; index++) {
+            if (booksMap[searchData[index]["cacheId"]])
+                selectedData.push(searchData[index])
+        }
+        this.props.selectedBooksData(selectedData)
+    }
+
     render() {
         let rowStyle = {
             "display": "inline-flex",
@@ -75,6 +87,13 @@ class SearchModal extends Component {
             "right": "-2rem",
             "cursor": "pointer"
         }
+        let loader = (
+            <div>
+                <Dimmer active inverted>
+                    <Loader />
+                </Dimmer>
+            </div>
+        )
         let searchData = this.state.searchData
         let booksList = []
         if (searchData) {
@@ -108,7 +127,7 @@ class SearchModal extends Component {
             }
         }
         return (
-            <Modal open={this.props.showModal} size="large">
+            <Modal open={this.props.showModal || this.props.isLoading} size="large">
                 <Modal.Header>
                     Search Books
                     <div style={{"display": "inline-flex", "marginLeft": "40rem"}}>
@@ -129,9 +148,10 @@ class SearchModal extends Component {
                         <Button basic color="green">Previous</Button>
                         <Button basic color="green" style={{"marginLeft": "5px"}}>Next</Button>
                     </div>
+                    {this.props.isLoading?loader:null}
                 </Modal.Content>
                 <Modal.Content style={{"borderTop": "1px solid rgba(34,36,38,.15)"}}>
-                    <Button color="red">Save</Button>
+                    <Button color="red" onClick={this.submitSelectedBooksData}>Save</Button>
                 </Modal.Content>
             </Modal>
         )

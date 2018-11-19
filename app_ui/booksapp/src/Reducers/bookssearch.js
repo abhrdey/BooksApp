@@ -3,7 +3,8 @@ import actionConstants from '../Constants/ActionNames'
 
 const initialState = {
     searchResults: undefined,
-    searchPrefix: undefined
+    searchPrefix: undefined,
+    isLoadingSearchData: undefined
 }
 
 export default (state=initialState, action) => {
@@ -11,12 +12,14 @@ export default (state=initialState, action) => {
         case actionConstants.SET_BOOK_SEARCH_DATA:
             return {
                 ...state,
-                searchResults: action.payload
+                searchResults: action.payload,
+                isLoadingSearchData: false
             }
         case actionConstants.SET_BOOK_SEARCH_PREFIX:
             return {
                 ...state,
-                searchPrefix: action.payload
+                searchPrefix: action.payload,
+                isLoadingSearchData: true
             }
         default:
             return state

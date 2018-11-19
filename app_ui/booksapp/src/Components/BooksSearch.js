@@ -35,7 +35,7 @@ class BooksSearch extends Component {
     handleKeyPress = (event) => {
         if (event.key === "Enter") {
             this.props.setSearchPrefix(this.state.searchPrefix)
-            request.get("http://localhost:8000/booksApp/search").query({ 'data': this.state.searchPrefix }).then(response => {
+            request.get(actionConstants.API_HOST + "/booksApp/search").query({ 'data': this.state.searchPrefix }).then(response => {
                 console.log(response)
                 if (response["status"] === 200) {
                     let results = response["body"]

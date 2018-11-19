@@ -5,9 +5,10 @@ import HomeFilters from './HomeFilters'
 import HomeContent from './HomeContent'
 import SearchContainer from '../Search/SearchContainer'
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
     return {
-        ...state
+        ...state,
+        cookies: ownProps.cookies
     }
 }
 
@@ -17,7 +18,7 @@ class Home extends Component {
             "marginLeft": "-8rem",
             "paddingTop": "5px"
         }
-
+        console.log("cookies : ", this.props)
         return (
             <Container>
                 <Grid style={gridStyle}>
@@ -28,7 +29,7 @@ class Home extends Component {
                         <HomeContent />
                     </Grid.Column>
                 </Grid>
-                <SearchContainer />
+                <SearchContainer cookies={this.props.cookies} />
             </Container>
         )
     }

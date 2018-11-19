@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
+import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 import App from './App';
@@ -12,11 +13,13 @@ import * as serviceWorker from './serviceWorker';
 const store = createStore(bookssearch)
 
 ReactDOM.render((
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
+    <CookiesProvider>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    </CookiesProvider>
     ), document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

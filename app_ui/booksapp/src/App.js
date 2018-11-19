@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import Home from './Components/Home/Home'
 import Header from './Components/Header'
 import Dropbox from './Components/Dropbox/Dropbox'
+import { withCookies } from 'react-cookie'
 import './App.css';
 
 class App extends Component {
@@ -26,12 +27,12 @@ class App extends Component {
         </header> */}
         <Header />
         <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/dropbox' component={Dropbox} />
+          <Route exact path='/' render={() => (<Home cookies={this.props.cookies} />)} />
+          <Route path='/dropbox' render={() => (<Dropbox cookies={this.props.cookies} />)} />
         </Switch>
       </div>
     );
   }
 }
 
-export default App;
+export default withCookies(App);
