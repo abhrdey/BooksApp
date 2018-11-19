@@ -8,7 +8,7 @@ class SearchThumbnail extends Component {
         return (
             <Card>
                 <Image src={this.props.imageLink} />
-                <Checkbox checked={this.props.setSelectAll} />
+                <Checkbox checked={this.props.checked} onChange={this.props.toggleCheckbox}  />
                 <Card.Content>
                     <Card.Header>
                         {this.props.title}

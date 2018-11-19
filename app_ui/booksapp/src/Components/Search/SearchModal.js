@@ -8,15 +8,49 @@ class SearchModal extends Component {
         super(props)
 
         this.state = {
-            setSelectAll: false
+            searchData: undefined,
+            setSelectAll: false,
+            booksMap: undefined
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.searchData !== this.props.searchData) {
+            let booksMap = {}
+            let searchData = nextProps.searchData
+            for (let index=0; index<searchData.length; index++) {
+                let cacheId = searchData[index]["cacheId"]
+                booksMap[cacheId] = false
+            }
+            this.setState({
+                searchData: searchData,
+                booksMap: booksMap
+            })
         }
     }
 
     toggleSelectAll = () => {
+        let booksMap = this.state.booksMap
+        for (let index in booksMap) {
+            if ((!this.state.setSelectAll && !booksMap[index]) ||
+                (this.state.setSelectAll && booksMap[index]))
+                booksMap[index] = !booksMap[index]
+        }
         this.setState({
+            booksMap: booksMap,
             setSelectAll: !this.state.setSelectAll
         })
     }
+
+    toggleCheckbox = (cacheId) => {
+        let booksMap =  Object.assign({}, this.state.booksMap)
+        booksMap[cacheId] = !booksMap[cacheId]
+        this.setState({
+            booksMap: booksMap,
+            setSelectAll: false
+        })
+    }
+
     render() {
         let rowStyle = {
             "display": "inline-flex",
@@ -41,7 +75,7 @@ class SearchModal extends Component {
             "right": "-2rem",
             "cursor": "pointer"
         }
-        let searchData = this.props.searchData
+        let searchData = this.state.searchData
         let booksList = []
         if (searchData) {
             let numberBooks = searchData.length
@@ -52,13 +86,15 @@ class SearchModal extends Component {
                 for (let start_index=index; ((start_index<(index+3))&&(start_index<numberBooks)); start_index++) {
                     let data = searchData[start_index]
                     let pagemap = data["pagemap"]
+                    let cacheId = data["cacheId"]
                     let title = data["title"]
                     let thumbnail = pagemap["cse_thumbnail"][0]
                     let thumbnailLink = thumbnail["src"]
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
                             {/* <Image src={thumbnailLink} /> */}
-                            <SearchThumbnail imageLink={thumbnailLink} title={title} setSelectAll={this.state.setSelectAll} />
+                            <SearchThumbnail imageLink={thumbnailLink} title={title} toggleCheckbox={() => this.toggleCheckbox(cacheId)}
+                                checked={this.state.booksMap?this.state.booksMap[cacheId]:false} />
                         </Grid.Column>
                     )
                     rowData.push(columnData)
