@@ -12,6 +12,12 @@ const mapStateToProps = (state, ownProps) => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        setSelectedBooksData: (payload) => dispatch({type: actionConstants.SET_SELECTED_BOOKS_DATA, payload: payload})
+    }
+}
+
 class SearchContainer extends Component {
     constructor(props) {
         super(props)
@@ -39,9 +45,10 @@ class SearchContainer extends Component {
 
     submitSelectedBooksData = (data) => {
         console.log("selected books : ", data)
+        this.props.setSelectedBooksData(data)
         //this.props.cookies.set("name", "abc")
-        let csrf_token = this.props.cookies.get('csrftoken')
-        console.log("cookie csrftoken : ", csrf_token)
+        //let csrf_token = this.props.cookies.get('csrftoken')
+        //console.log("cookie csrftoken : ", csrf_token)
         // request.post(actionConstants.API_HOST + "/booksApp/metadata").send({
         //     payload: data
         // }).set({
@@ -69,4 +76,4 @@ class SearchContainer extends Component {
     }
 }
 
-export default connect(mapStateToProps)(SearchContainer)
+export default connect(mapStateToProps,mapDispatchToProps)(SearchContainer)

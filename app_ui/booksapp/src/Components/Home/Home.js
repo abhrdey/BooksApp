@@ -26,7 +26,7 @@ class Home extends Component {
                         <HomeFilters />
                     </Grid.Column>
                     <Grid.Column width={13}>
-                        <HomeContent />
+                        <HomeContent selectedBooks={this.props.selectedBooks} />
                     </Grid.Column>
                 </Grid>
                 <SearchContainer cookies={this.props.cookies} />

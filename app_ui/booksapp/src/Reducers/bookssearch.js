@@ -4,6 +4,7 @@ import actionConstants from '../Constants/ActionNames'
 const initialState = {
     searchResults: undefined,
     searchPrefix: undefined,
+    selectedBooks: undefined,
     isLoadingSearchData: undefined
 }
 
@@ -20,6 +21,11 @@ export default (state=initialState, action) => {
                 ...state,
                 searchPrefix: action.payload,
                 isLoadingSearchData: true
+            }
+        case actionConstants.SET_SELECTED_BOOKS_DATA:
+            return {
+                ...state,
+                selectedBooks: action.payload
             }
         default:
             return state

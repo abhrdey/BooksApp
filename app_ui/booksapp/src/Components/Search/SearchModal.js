@@ -121,7 +121,7 @@ class SearchModal extends Component {
                         <Grid.Column key={start_index} style={columnStyle}>
                             {/* <Image src={thumbnailLink} /> */}
                             <SearchThumbnail imageLink={thumbnailLink} title={title} toggleCheckbox={() => this.toggleCheckbox(cacheId)}
-                                checked={this.state.booksMap?this.state.booksMap[cacheId]:false} />
+                                checked={this.state.booksMap?this.state.booksMap[cacheId]:false} display="Search" />
                         </Grid.Column>
                     )
                     rowData.push(columnData)
