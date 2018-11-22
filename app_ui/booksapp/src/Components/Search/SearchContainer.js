@@ -57,6 +57,7 @@ class SearchContainer extends Component {
             "Content-Type": "application/json"
         }).then(response => {
             console.log("search metadata response : ", response)
+            this.closeModal()
         })
     }
 

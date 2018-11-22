@@ -10,7 +10,8 @@ class SearchModal extends Component {
         this.state = {
             searchData: undefined,
             setSelectAll: false,
-            booksMap: undefined
+            booksMap: undefined,
+            isLoading: false
         }
     }
 
@@ -27,6 +28,10 @@ class SearchModal extends Component {
                 booksMap: booksMap
             })
         }
+        if ((nextProps.showModal !== this.props.showModal) && nextProps.showModal === false)
+            this.setState({
+                isLoading: false
+            })
     }
 
     toggleSelectAll = () => {
@@ -60,6 +65,9 @@ class SearchModal extends Component {
             if (booksMap[searchData[index]["cacheId"]])
                 selectedData.push(searchData[index])
         }
+        this.setState({
+            isLoading: true
+        })
         this.props.selectedBooksData(selectedData)
     }
 
@@ -148,7 +156,7 @@ class SearchModal extends Component {
                         <Button basic color="green">Previous</Button>
                         <Button basic color="green" style={{"marginLeft": "5px"}}>Next</Button>
                     </div>
-                    {this.props.isLoading?loader:null}
+                    {this.props.isLoading||this.state.isLoading?loader:null}
                 </Modal.Content>
                 <Modal.Content style={{"borderTop": "1px solid rgba(34,36,38,.15)"}}>
                     <Button color="red" onClick={this.submitSelectedBooksData}>Save</Button>
