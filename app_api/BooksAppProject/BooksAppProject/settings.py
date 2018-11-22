@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+#from corsheaders.defaults import default_methods, default_headers
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,20 +39,38 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'BooksApp.apps.BooksappConfig',
-    'corsheaders'
+    'corsheaders',
+    'BooksApp.apps.BooksappConfig'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    # 'BooksApp.middlewares.cors_middleware.cors_middleware'
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000'
+)
+CSRF_TRUSTED_ORIGINS = (
+    'localhost:3000'
+)
+
+# CORS_ORIGIN_ALLOW_ALL = True
+# CORS_ALLOW_METHODS = default_methods
+# CORS_ALLOW_HEADERS = default_headers
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ]
+}
 
 ROOT_URLCONF = 'BooksAppProject.urls'
 

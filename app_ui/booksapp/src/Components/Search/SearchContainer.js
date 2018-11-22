@@ -39,12 +39,22 @@ class SearchContainer extends Component {
 
     submitSelectedBooksData = (data) => {
         console.log("selected books : ", data)
-        this.props.cookies.set("name", "abc")
-        let csrf_token = this.props.cookies.get('name')
+        //this.props.cookies.set("name", "abc")
+        let csrf_token = this.props.cookies.get('csrftoken')
+        console.log("cookie csrftoken : ", csrf_token)
+        // request.post(actionConstants.API_HOST + "/booksApp/metadata").send({
+        //     payload: data
+        // }).set({
+        //     "X-CSRFToken": this.props.cookies.get('csrftoken'),
+        //     "Content-Type": "application/x-www-form-urlencoded",
+        //     "Access-Control-Allow-Credentials": true
+        // }).then(response => {
+        //     console.log("search metadata response : ", response)
+        // })
         request.post(actionConstants.API_HOST + "/booksApp/metadata").send({
             payload: data
         }).set({
-            "Access-Control-Allow-Credentials": true
+            "Content-Type": "application/json"
         }).then(response => {
             console.log("search metadata response : ", response)
         })
