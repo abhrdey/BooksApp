@@ -5,7 +5,8 @@ const initialState = {
     searchResults: undefined,
     searchPrefix: undefined,
     selectedBooks: undefined,
-    isLoadingSearchData: undefined
+    isLoadingSearchData: undefined,
+    searchPageIndex: 1
 }
 
 export default (state=initialState, action) => {
@@ -26,6 +27,12 @@ export default (state=initialState, action) => {
             return {
                 ...state,
                 selectedBooks: action.payload
+            }
+        case actionConstants.SET_SEARCH_INDEX:
+            return {
+                ...state,
+                searchPageIndex: action.payload,
+                isLoadingSearchData: true
             }
         default:
             return state

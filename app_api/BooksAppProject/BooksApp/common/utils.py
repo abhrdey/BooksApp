@@ -2,15 +2,15 @@
 from ..constants import urls, constants
 import json
 
-def fetch_custom_search_url(prefix):
+def fetch_custom_search_url(prefix,index):
     base_url = urls.CUSTOM_SEARCH_URL
     query_params = fetch_custom_search_query_params()
     api_key = query_params["api_key"]
     search_engine_id = query_params["search_engine_id"]
-    return create_custom_search_url(base_url, api_key, search_engine_id, prefix)
+    return create_custom_search_url(base_url, api_key, search_engine_id, prefix, index)
 
-def create_custom_search_url(base_url, api_key, search_engine_id, search_prefix):
-    return "{}?key={}&cx={}&q={}".format(base_url,api_key,search_engine_id,search_prefix)
+def create_custom_search_url(base_url, api_key, search_engine_id, search_prefix, index):
+    return "{}?key={}&cx={}&q={}&start={}".format(base_url,api_key,search_engine_id,search_prefix,index)
 
 
 def fetch_custom_search_query_params():

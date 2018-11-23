@@ -14,7 +14,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        setSelectedBooksData: (payload) => dispatch({type: actionConstants.SET_SELECTED_BOOKS_DATA, payload: payload})
+        setSelectedBooksData: (payload) => dispatch({type: actionConstants.SET_SELECTED_BOOKS_DATA, payload: payload}),
+        setSearchPaginationIndex: (payload) => dispatch({type: actionConstants.SET_SEARCH_INDEX, payload: payload})
     }
 }
 
@@ -68,10 +69,21 @@ class SearchContainer extends Component {
         })
     }
 
+    handleNextClick = () => {
+        let currPageIndex = this.props.searchPageIndex
+        this.props.setSearchPaginationIndex(currPageIndex + 10)
+    }
+
+    handlePreviousClick = () => {
+        let currPageIndex = this.props.searchPageIndex
+        this.props.setSearchPaginationIndex(currPageIndex - 10)
+    }
+
     render() {
         return(
             <SearchModal searchData={this.state.searchData} showModal={this.state.showModal} closeModal={this.closeModal}
-                selectedBooksData={this.submitSelectedBooksData} isLoading={this.props.isLoadingSearchData}  />
+                selectedBooksData={this.submitSelectedBooksData} isLoading={this.props.isLoadingSearchData}
+                handleNextClick={this.handleNextClick} handlePreviousClick={this.handlePreviousClick} currPageIndex={this.props.searchPageIndex} />
         )
     }
 }

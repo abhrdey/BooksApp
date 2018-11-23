@@ -4,8 +4,10 @@ from ..models import Books
 import requests, json
 
 def fetch_search_data(request):
-    prefix = fetch_search_prefix(request)
-    url = utils.fetch_custom_search_url(prefix)
+    query_params = fetch_query_params(request)
+    prefix = fetch_search_prefix(query_params)
+    index = fetch_pagination_index(query_params)
+    url = utils.fetch_custom_search_url(prefix,index)
     headers = {
         "Content-Type": "application/json",
         "accept": "application/json"
@@ -34,7 +36,15 @@ def update_books_db(results):
         )
         book.save()
 
-def fetch_search_prefix(request):
+def fetch_query_params(request):
     query_params = request.query_params
+    return query_params
+
+def fetch_search_prefix(query_params):
+    # query_params = request.query_params
     prefix = query_params["data"]
     return prefix
+
+def fetch_pagination_index(query_params):
+    index = query_params["start"]
+    return index

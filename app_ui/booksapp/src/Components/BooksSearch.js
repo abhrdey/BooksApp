@@ -26,6 +26,11 @@ class BooksSearch extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.searchPageIndex !== this.props.searchPageIndex)
+            this.initiateSearch(nextProps.searchPrefix, nextProps.searchPageIndex)
+    }
+
     handleSearchChange = (event, data) => {
         this.setState({
             searchPrefix: data.value
@@ -35,14 +40,25 @@ class BooksSearch extends Component {
     handleKeyPress = (event) => {
         if (event.key === "Enter") {
             this.props.setSearchPrefix(this.state.searchPrefix)
-            request.get(actionConstants.API_HOST + "/booksApp/search").query({ 'data': this.state.searchPrefix }).then(response => {
-                console.log(response)
-                if (response["status"] === 200) {
-                    let results = response["body"]
-                    this.props.setSearchResults(results)
-                }
-            })
+            // request.get(actionConstants.API_HOST + "/booksApp/search").query({ 'data': this.state.searchPrefix, 'start': this.props.searchPageIndex }).then(response => {
+            //     console.log(response)
+            //     if (response["status"] === 200) {
+            //         let results = response["body"]
+            //         this.props.setSearchResults(results)
+            //     }
+            // })
+            this.initiateSearch(this.state.searchPrefix, this.props.searchPageIndex)
         }
+    }
+
+    initiateSearch = (prefix, index) => {
+        request.get(actionConstants.API_HOST + "/booksApp/search").query({ 'data': prefix, 'start': index }).then(response => {
+            console.log(response)
+            if (response["status"] === 200) {
+                let results = response["body"]
+                this.props.setSearchResults(results)
+            }
+        })
     }
 
     render() {
