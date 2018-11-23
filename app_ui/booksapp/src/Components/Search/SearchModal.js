@@ -115,8 +115,8 @@ class SearchModal extends Component {
                     let pagemap = data["pagemap"]
                     let cacheId = data["cacheId"]
                     let title = data["title"]
-                    let thumbnail = pagemap["cse_thumbnail"][0]
-                    let thumbnailLink = thumbnail["src"]
+                    let thumbnail = pagemap["cse_thumbnail"]?pagemap["cse_thumbnail"][0]:null
+                    let thumbnailLink = thumbnail?thumbnail["src"]:null
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
                             {/* <Image src={thumbnailLink} /> */}

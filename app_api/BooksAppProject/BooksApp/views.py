@@ -8,7 +8,7 @@ from .controllers import search_controller, metadata_controller
 @ensure_csrf_cookie
 def search_handler(request):
     results = search_controller.fetch_search_data(request)
-    return Response(results)
+    return Response(results["data"],results["status"])
 
 @api_view(['POST'])
 @ensure_csrf_cookie

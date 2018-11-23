@@ -58,6 +58,9 @@ class BooksSearch extends Component {
                 let results = response["body"]
                 this.props.setSearchResults(results)
             }
+        }).catch(error => {
+            console.log("Search error : ", error["response"]["text"])
+            this.props.setSearchResults(undefined)
         })
     }
 

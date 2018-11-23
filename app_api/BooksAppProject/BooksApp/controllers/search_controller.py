@@ -17,7 +17,20 @@ def fetch_search_data(request):
     # searched results should not be updated in db directly; instead selected 
     # searched results should be updated, which is handled in metadata_controller file
     #update_books_db(search_results["items"])
-    return search_results["items"]
+    try:
+        items = search_results["items"]
+        payload = {
+            "data": items,
+            "status": 200
+        }
+        return payload
+    except KeyError as ex:
+        print("KeyError occured when indexing items")
+        payload = {
+            "data": search_results["error"]["message"],
+            "status": search_results["error"]["code"]
+        }
+        return payload
 
 # The below method (update_books_db) is temporary and should be replaced by an async call to update the db 
 #     with searched results
