@@ -1,0 +1,17 @@
+.ui.warning.message {
+    position: relative;
+    top: 4.7rem;
+    box-shadow: none;
+}
+
+.ui.success.message {
+    position: relative;
+    top: 4.7rem;
+    box-shadow: none;
+}
+
+.ui.negative.message {
+    position: relative;
+    top: 4.7rem;
+    box-shadow: none;
+}

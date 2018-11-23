@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import BooksSearch from './BooksSearch'
+import GlobalError from './GlobalError'
 import './Header.css'
 import { withRouter } from 'react-router-dom'
-import { Menu, Icon } from 'semantic-ui-react'
+import { Menu, Icon, Container } from 'semantic-ui-react'
 
 class Header extends Component {
     constructor(props) {
@@ -33,23 +34,28 @@ class Header extends Component {
     render() {
         let headerStyle = {
             "paddingTop": "5px",
-            "paddingLeft": "5px"
+            "paddingLeft": "5px",
+            "position": "relative",
+            "top": "-4rem"
         }
 
         return (
-            <Menu tabular style={headerStyle}>
-                <Menu.Item name="Home" active={this.state.activeTab === "Home"} onClick={this.toggleTab} />
-                <Menu.Item name="Dropbox" active={this.state.activeTab === "Dropbox"} 
-                    onClick={this.toggleTab} />
-                <Menu.Menu position='right'>
-                    <Menu.Item>
-                        <BooksSearch />
-                    </Menu.Item>
-                    <Menu.Item>
-                        <Icon name="log out" />
-                    </Menu.Item>
-                </Menu.Menu>
-            </Menu>
+            <div>
+                <GlobalError />
+                <Menu tabular style={headerStyle}>
+                    <Menu.Item name="Home" active={this.state.activeTab === "Home"} onClick={this.toggleTab} />
+                    <Menu.Item name="Dropbox" active={this.state.activeTab === "Dropbox"} 
+                        onClick={this.toggleTab} />
+                    <Menu.Menu position='right'>
+                        <Menu.Item>
+                            <BooksSearch />
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Icon name="log out" />
+                        </Menu.Item>
+                    </Menu.Menu>
+                </Menu>
+            </div>
         )
     }
 }
