@@ -153,8 +153,8 @@ class SearchModal extends Component {
                     </div>
                     {booksList}
                     <div style={paginationButtonStyle}>
-                        {this.props.currPageIndex>1?<Button basic color="green" onClick={this.props.handlePreviousClick}>Previous</Button>:null}
-                        {this.props.currPageIndex<100?<Button basic color="green" style={this.props.currPageIndex>1?{"marginLeft": "5px"}:{"position":"relative","left":"7rem"}} onClick={this.props.handleNextClick}>Next</Button>:null}
+                        {this.props.currPageIndex>1?<Button basic color="green" style={this.props.currPageIndex<91?null:{"position":"relative","left":"7rem"}} onClick={this.props.handlePreviousClick}>Previous</Button>:null}
+                        {this.props.currPageIndex<91?<Button basic color="green" style={this.props.currPageIndex>1?{"marginLeft": "5px"}:{"position":"relative","left":"7rem"}} onClick={this.props.handleNextClick}>Next</Button>:null}
                     </div>
                     {this.props.isLoading||this.state.isLoading?loader:null}
                 </Modal.Content>
