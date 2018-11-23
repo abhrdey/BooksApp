@@ -7,8 +7,8 @@ class HomeContent extends Component {
         let headingStyle = {
             "marginLeft": "10px",
             "borderBottom": "1px solid #d4d4d5",
-            "font-size": "25px",
-            "font-family": "auto"
+            "fontSize": "25px",
+            "fontFamily": "auto"
         }
         if (this.props.selectedBooks) {
             let selectedBooks = this.props.selectedBooks
