@@ -12,7 +12,9 @@ def fetch_search_data(request):
     }
     response = requests.get(url, headers=headers)
     search_results = json.loads(response.content.decode('utf-8'))
-    update_books_db(search_results["items"])
+    # searched results should not be updated in db directly; instead selected 
+    # searched results should be updated, which is handled in metadata_controller file
+    #update_books_db(search_results["items"])
     return search_results["items"]
 
 # The below method (update_books_db) is temporary and should be replaced by an async call to update the db 
