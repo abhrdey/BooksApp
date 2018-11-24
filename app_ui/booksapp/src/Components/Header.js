@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 import BooksSearch from './BooksSearch'
 import GlobalError from './GlobalError'
 import './Header.css'
-import { withRouter } from 'react-router-dom'
 import { Menu, Icon } from 'semantic-ui-react'
+
+const mapStateToProps = state => {
+    return {
+        ...state.message
+    }
+}
 
 class Header extends Component {
     constructor(props) {
@@ -34,10 +41,16 @@ class Header extends Component {
     render() {
         let headerStyle = {
             "paddingTop": "5px",
-            "paddingLeft": "5px",
-            "position": "relative",
-            "top": "-4rem"
+            "paddingLeft": "5px"
         }
+
+        if (this.props.errorMessage || this.props.infoMessage)
+            headerStyle = {
+                ...headerStyle,
+                "paddingTop": "10px",
+                "position": "relative",
+                "top": "-4rem"
+            }
 
         return (
             <div>
@@ -60,4 +73,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header)
+export default withRouter(connect(mapStateToProps)(Header))

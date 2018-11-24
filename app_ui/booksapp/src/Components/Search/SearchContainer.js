@@ -7,7 +7,7 @@ import request from 'superagent'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        ...state,
+        ...state.search,
         cookies: ownProps.cookies
     }
 }

@@ -7,7 +7,7 @@ import SearchContainer from '../Search/SearchContainer'
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        ...state,
+        ...state.search,
         cookies: ownProps.cookies
     }
 }

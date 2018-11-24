@@ -1,6 +1,6 @@
 .ui.warning.message {
     position: relative;
-    top: 4.7rem;
+    top: 5rem;
     box-shadow: none;
     width: 75%;
     margin-left: 12.5%;
@@ -8,7 +8,7 @@
 
 .ui.success.message {
     position: relative;
-    top: 4.7rem;
+    top: 5rem;
     box-shadow: none;
     width: 75%;
     margin-left: 12.5%;
@@ -16,7 +16,7 @@
 
 .ui.negative.message {
     position: relative;
-    top: 4.7rem;
+    top: 5rem;
     box-shadow: none;
     width: 75%;
     margin-left: 12.5%;

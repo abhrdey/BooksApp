@@ -6,14 +6,15 @@ import actionConstants from '../Constants/ActionNames'
 
 const mapStateToProps = state => {
     return {
-        ...state
+        ...state.search
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         setSearchResults: (payload) => dispatch({type: actionConstants.SET_BOOK_SEARCH_DATA, payload: payload}),
-        setSearchPrefix: (payload) => dispatch({type: actionConstants.SET_BOOK_SEARCH_PREFIX, payload: payload})
+        setSearchPrefix: (payload) => dispatch({type: actionConstants.SET_BOOK_SEARCH_PREFIX, payload: payload}),
+        setErrorMessage: (payload) => dispatch({type: actionConstants.SET_ERROR_MESSAGE, payload: payload})
     }
 }
 
@@ -59,8 +60,10 @@ class BooksSearch extends Component {
                 this.props.setSearchResults(results)
             }
         }).catch(error => {
-            console.log("Search error : ", error["response"]["text"])
+            let errorMessage = error["response"]["text"]
+            console.log("Search error : ", errorMessage)
             this.props.setSearchResults(undefined)
+            this.props.setErrorMessage(errorMessage)
         })
     }
 

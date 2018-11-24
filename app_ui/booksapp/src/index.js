@@ -7,14 +7,14 @@ import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 import App from './App';
-import bookssearch from './Reducers/search'
+import search from './Reducers/search'
 import message from './Reducers/message'
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(combineReducers(
-    bookssearch,
+const store = createStore(combineReducers({
+    search,
     message
-))
+}))
 
 ReactDOM.render((
     <CookiesProvider>
