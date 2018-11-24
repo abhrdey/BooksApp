@@ -3,7 +3,7 @@ import BooksSearch from './BooksSearch'
 import GlobalError from './GlobalError'
 import './Header.css'
 import { withRouter } from 'react-router-dom'
-import { Menu, Icon, Container } from 'semantic-ui-react'
+import { Menu, Icon } from 'semantic-ui-react'
 
 class Header extends Component {
     constructor(props) {

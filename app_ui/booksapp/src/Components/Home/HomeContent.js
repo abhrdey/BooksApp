@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Segment, Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 import SearchThumbnail from '../Thumbnail/SearchThumbnail'
 
 class HomeContent extends Component {
@@ -28,9 +28,6 @@ class HomeContent extends Component {
                 rowData.push(columnData)
             }
             return(
-                // <Segment placeholder>
-                //     This is Home content section
-                // </Segment>
                 <Grid>
                     <Grid.Row style={headingStyle}>
                         Recently Added

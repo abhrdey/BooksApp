@@ -2,15 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, combineReducers } from 'redux'
 import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import 'semantic-ui-css/semantic.min.css'
 import App from './App';
-import bookssearch from './Reducers/bookssearch'
+import bookssearch from './Reducers/search'
+import message from './Reducers/message'
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(bookssearch)
+const store = createStore(combineReducers(
+    bookssearch,
+    message
+))
 
 ReactDOM.render((
     <CookiesProvider>

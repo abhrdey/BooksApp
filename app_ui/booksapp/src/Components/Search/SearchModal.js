@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import BooksSearch from '../BooksSearch'
 import SearchThumbnail from '../Thumbnail/SearchThumbnail'
-import { Modal, Grid, Image, Button, Icon, Dimmer, Loader } from 'semantic-ui-react'
+import { Modal, Grid, Button, Icon, Dimmer, Loader } from 'semantic-ui-react'
 
 class SearchModal extends Component {
     constructor(props) {
@@ -119,7 +119,6 @@ class SearchModal extends Component {
                     let thumbnailLink = thumbnail?thumbnail["src"]:null
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
-                            {/* <Image src={thumbnailLink} /> */}
                             <SearchThumbnail imageLink={thumbnailLink} title={title} toggleCheckbox={() => this.toggleCheckbox(cacheId)}
                                 checked={this.state.booksMap?this.state.booksMap[cacheId]:false} display="Search" />
                         </Grid.Column>
