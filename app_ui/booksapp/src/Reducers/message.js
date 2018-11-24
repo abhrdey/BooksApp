@@ -18,6 +18,12 @@ export default (state=initialState, action) => {
                 ...state,
                 errorMessage: action.payload
             }
+        case actionConstants.CLEAR_GLOBAL_MESSAGE:
+            return {
+                ...state,
+                errorMessage: undefined,
+                infoMessage: undefined
+            }
         default:
             return state
     }
