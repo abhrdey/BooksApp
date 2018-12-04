@@ -7,7 +7,7 @@ def fetch_search_data(request):
     query_params = fetch_query_params(request)
     prefix = fetch_search_prefix(query_params)
     index = fetch_pagination_index(query_params)
-    url = utils.fetch_custom_search_url(prefix,index)
+    url = utils.fetch_volumes_search_url(prefix,index)
     headers = {
         "Content-Type": "application/json",
         "accept": "application/json"

@@ -6,7 +6,7 @@ const initialState = {
     searchPrefix: undefined,
     selectedBooks: undefined,
     isLoadingSearchData: undefined,
-    searchPageIndex: 1
+    searchPageIndex: 0
 }
 
 export default (state=initialState, action) => {

@@ -20,7 +20,8 @@ class SearchModal extends Component {
             let booksMap = {}
             let searchData = nextProps.searchData
             for (let index=0; index<searchData.length; index++) {
-                let cacheId = searchData[index]["cacheId"]
+                // let cacheId = searchData[index]["cacheId"]
+                let cacheId = searchData[index]["id"]
                 booksMap[cacheId] = false
             }
             this.setState({
@@ -62,7 +63,7 @@ class SearchModal extends Component {
         let selectedData = []
 
         for (let index=0; index<searchData.length; index++) {
-            if (booksMap[searchData[index]["cacheId"]])
+            if (booksMap[searchData[index]["id"]])
                 selectedData.push(searchData[index])
         }
         this.setState({
@@ -112,11 +113,14 @@ class SearchModal extends Component {
                 let rowData = []
                 for (let start_index=index; ((start_index<(index+3))&&(start_index<numberBooks)); start_index++) {
                     let data = searchData[start_index]
-                    let pagemap = data["pagemap"]
-                    let cacheId = data["cacheId"]
-                    let title = data["title"]
-                    let thumbnail = pagemap["cse_thumbnail"]?pagemap["cse_thumbnail"][0]:null
-                    let thumbnailLink = thumbnail?thumbnail["src"]:null
+                    let volumeInfo = data["volumeInfo"]
+                    //let pagemap = data["pagemap"]
+                    let cacheId = data["id"]
+                    let title = volumeInfo["title"]
+                    let imageLinks = volumeInfo["imageLinks"]
+                    //let thumbnail = pagemap["cse_thumbnail"]?pagemap["cse_thumbnail"][0]:null
+                    //let thumbnailLink = thumbnail?thumbnail["src"]:null
+                    let thumbnailLink = imageLinks["smallThumbnail"]
                     let columnData = (
                         <Grid.Column key={start_index} style={columnStyle}>
                             <SearchThumbnail imageLink={thumbnailLink} title={title} toggleCheckbox={() => this.toggleCheckbox(cacheId)}
@@ -152,8 +156,8 @@ class SearchModal extends Component {
                     </div>
                     {booksList}
                     <div style={paginationButtonStyle}>
-                        {this.props.currPageIndex>1?<Button basic color="green" style={this.props.currPageIndex<91?null:{"position":"relative","left":"5rem"}} onClick={this.props.handlePreviousClick}>Previous</Button>:null}
-                        {this.props.currPageIndex<91?<Button basic color="green" style={this.props.currPageIndex>1?{"marginLeft": "5px"}:{"position":"relative","left":"7rem"}} onClick={this.props.handleNextClick}>Next</Button>:null}
+                        {this.props.currPageIndex>0?<Button basic color="green" style={this.props.currPageIndex<90?null:{"position":"relative","left":"5rem"}} onClick={this.props.handlePreviousClick}>Previous</Button>:null}
+                        {this.props.currPageIndex<90?<Button basic color="green" style={this.props.currPageIndex>0?{"marginLeft": "5px"}:{"position":"relative","left":"7rem"}} onClick={this.props.handleNextClick}>Next</Button>:null}
                     </div>
                     {this.props.isLoading||this.state.isLoading?loader:null}
                 </Modal.Content>

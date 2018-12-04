@@ -2,6 +2,14 @@
 from ..constants import urls, constants
 import json
 
+
+def fetch_volumes_search_url(prefix,index):
+    base_url = urls.BOOKS_URL
+    return create_volumes_search_url(base_url, prefix, index)
+
+def create_volumes_search_url(base_url, prefix, index):
+    return "{}/volumes?q={}&startIndex={}".format(base_url,prefix,index)
+
 def fetch_custom_search_url(prefix,index):
     base_url = urls.CUSTOM_SEARCH_URL
     query_params = fetch_custom_search_query_params()
