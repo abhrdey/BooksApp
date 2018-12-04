@@ -15,15 +15,14 @@ def store_metadata(request):
 
 def update_books_db(data):
     book = Books(
-        cache_id=data["cacheId"],
-        title=data["title"],
+        cache_id=data["id"],
+        title=data["volumeInfo"]["title"],
         kind=data["kind"],
-        snippet=data["snippet"],
-        display_link=data["displayLink"],
-        link=data["link"],
-        image_link=data["pagemap"]["cse_image"][0]["src"],
-        thumbnail_link=data["pagemap"]["cse_thumbnail"][0]["src"],
-        formatted_url=data["formattedUrl"]
+        snippet=data["volumeInfo"]["subtitle"] if data["volumeInfo"]["subtitle"] else data["volumeInfo"]["title"] ,
+        display_link=data["volumeInfo"]["canonicalVolumeLink"],
+        link=data["volumeInfo"]["previewLink"],
+        thumbnail_link=data["volumeInfo"]["imageLinks"]["thumbnail"],
+        formatted_url=data["selfLink"]
     )
     book.save()
 

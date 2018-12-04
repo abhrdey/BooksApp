@@ -16,10 +16,13 @@ class HomeContent extends Component {
             let rowData = []
             for (let index=0; index<numberBooks; index++) {
                 let data = selectedBooks[index]
-                let pagemap = data["pagemap"]
-                let title = data["title"]
-                let thumbnail = pagemap["cse_thumbnail"][0]
-                let thumbnailLink = thumbnail["src"]
+                let volumeInfo = data["volumeInfo"]
+                //let pagemap = data["pagemap"]
+                let title = volumeInfo["title"]
+                //let thumbnail = pagemap["cse_thumbnail"][0]
+                //let thumbnailLink = thumbnail["src"]
+                let imageLinks = volumeInfo["imageLinks"]
+                let thumbnailLink = imageLinks["smallThumbnail"]
                 let columnData = (
                     <Grid.Column key={index}>
                         <SearchThumbnail imageLink={thumbnailLink} title={title} display="Home" />
