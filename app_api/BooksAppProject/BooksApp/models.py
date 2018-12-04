@@ -5,7 +5,7 @@ class Books(models.Model):
     title = models.TextField()
     kind = models.CharField(max_length=25)
     snippet = models.TextField()
-    display_link = models.CharField(max_length=50)
+    display_link = models.TextField()
     link = models.TextField()
     image_link = models.TextField()
     thumbnail_link = models.TextField()
