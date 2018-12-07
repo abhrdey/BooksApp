@@ -9,10 +9,12 @@ import 'semantic-ui-css/semantic.min.css'
 import App from './App';
 import search from './Reducers/search'
 import message from './Reducers/message'
+import dropbox from './Reducers/dropbox'
 import * as serviceWorker from './serviceWorker';
 
 const store = createStore(combineReducers({
     search,
+    dropbox,
     message
 }))
 

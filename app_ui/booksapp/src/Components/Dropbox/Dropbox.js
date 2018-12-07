@@ -1,7 +1,16 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import DropboxFilters from './DropboxFilters'
 import DropboxContent from './DropboxContent'
+import DropboxAuthModal from './DropboxAuthModal'
 import { Container, Grid } from 'semantic-ui-react'
+
+
+const mapStateToProps = state => {
+    return {
+        ...state.dropbox
+    }
+}
 
 class Dropbox extends Component {
     render() {
@@ -12,17 +21,22 @@ class Dropbox extends Component {
 
         return (
             <Container>
-                <Grid style={gridStyle}>
-                    <Grid.Column width='3'>
-                        <DropboxFilters />
-                    </Grid.Column>
-                    <Grid.Column width='13'>
-                        <DropboxContent />
-                    </Grid.Column>
-                </Grid>
+                {this.props.isAuthenticated?
+                    (
+                        <Grid style={gridStyle}>
+                            <Grid.Column width='3'>
+                                <DropboxFilters />
+                            </Grid.Column>
+                            <Grid.Column width='13'>
+                                <DropboxContent />
+                            </Grid.Column>
+                        </Grid>
+                    ):
+                    <DropboxAuthModal />
+                }
             </Container>
         )
     }
 }
 
-export default Dropbox
+export default connect(mapStateToProps)(Dropbox)
