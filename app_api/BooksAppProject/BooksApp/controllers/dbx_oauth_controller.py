@@ -1,5 +1,6 @@
 
 from ..constants import constants, urls
+from ..models import Account
 import json, requests
 
 def oauth_request(request):
@@ -37,12 +38,22 @@ def oauth_callback(request):
         query_params = json.loads(response.text)
         access_token = query_params["access_token"]
         account_id = query_params["account_id"]
+        insert_dbx_account_info(account_id,client_id,state,access_token)
     except Exception as ex:
         print("Exception thrown while fetching access_token from access_code {}".format(ex))
         return 401
     return 200    
 
-
+def insert_dbx_account_info(account_id,account_key,account_secret,account_token):
+    account = Account(
+        account_id=account_id,
+        account_name=constants.DROPBOX_ACCOUNT_NAME,
+        account_key=account_key,
+        account_secret=account_secret,
+        account_token=account_token
+    )
+    account.save()
+    
 def compare_dbx_state(final_state):
     with open('{}/client_secret.json'.format(constants.APP_NAME)) as json_file:
         json_data = json.load(json_file)
