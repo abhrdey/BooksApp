@@ -11,3 +11,17 @@ class Books(models.Model):
     thumbnail_link = models.TextField()
     formatted_url = models.TextField()
 
+class Account(models.Model):
+    account_id = models.CharField(max_length=50)
+    account_name = models.CharField(max_length=20)
+    account_key = models.TextField()
+    account_secret = models.TextField()
+    account_token = models.TextField()
+    
+class UserProfile(models.Model):
+    user_first_name = models.CharField(max_length=10)
+    user_last_name = models.CharField(max_length=10)
+    user_email = models.TextField()
+    user_full_name = models.CharField(max_length=20)
+    user_account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    
