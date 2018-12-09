@@ -1,6 +1,6 @@
 
 from ..constants import constants, urls
-from ..models import Account
+from ..models import Account, UserProfile
 import json, requests
 
 def oauth_request(request):
@@ -38,11 +38,40 @@ def oauth_callback(request):
         query_params = json.loads(response.text)
         access_token = query_params["access_token"]
         account_id = query_params["account_id"]
-        insert_dbx_account_info(account_id,client_id,state,access_token)
+        account = insert_dbx_account_info(account_id,client_id,state,access_token)
+        fetch_dbx_user_profile(account)
     except Exception as ex:
         print("Exception thrown while fetching access_token from access_code {}".format(ex))
         return 401
     return 200    
+
+def fetch_dbx_user_profile(account):
+    account_id = account.account_id
+    payload = {
+        "account_id": account_id
+    }
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {}".format(account.account_token)
+    }
+    response = requests.post(urls.DBX_USER_ACCOUNT_URL, data=json.dumps(payload), headers=headers)
+    print(response)
+    try:
+        data = json.loads(response.text)
+        insert_dbx_user_profile_info(account,data)
+    except Exception as ex:
+        print("Exception occured while fetching dropbox user profile {}".format(ex))
+
+def insert_dbx_user_profile_info(account, payload):
+    name = payload["name"]
+    user_profile = UserProfile(
+        user_first_name = name["given_name"],
+        user_last_name = name["surname"],
+        user_email = payload["email"],
+        user_full_name = name["display_name"],
+        user_account = account
+    )
+    user_profile.save()
 
 def insert_dbx_account_info(account_id,account_key,account_secret,account_token):
     account = Account(
@@ -53,7 +82,8 @@ def insert_dbx_account_info(account_id,account_key,account_secret,account_token)
         account_token=account_token
     )
     account.save()
-    
+    return account
+
 def compare_dbx_state(final_state):
     with open('{}/client_secret.json'.format(constants.APP_NAME)) as json_file:
         json_data = json.load(json_file)
