@@ -1,6 +1,7 @@
 
 # import json
 from ..models import Books
+from datetime import datetime
 
 def store_metadata(request):
     metadata = parse_request(request)
@@ -23,7 +24,8 @@ def update_books_db(data):
         link=data["volumeInfo"]["previewLink"],
         image_link=data["volumeInfo"]["imageLinks"]["thumbnail"],
         thumbnail_link=data["volumeInfo"]["imageLinks"]["thumbnail"],
-        formatted_url=data["selfLink"]
+        formatted_url=data["selfLink"],
+        updated_time=datetime.now()
     )
     book.save()
 

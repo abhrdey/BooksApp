@@ -1,6 +1,7 @@
 
 from ..common import utils
 from ..models import Books
+from datetime import datetime
 import requests, json
 
 def fetch_search_data(request):
@@ -45,7 +46,8 @@ def update_books_db(results):
             link=book_info["link"],
             image_link=book_info["pagemap"]["cse_image"][0]["src"],
             thumbnail_link=book_info["pagemap"]["cse_thumbnail"][0]["src"],
-            formatted_url=book_info["formattedUrl"]
+            formatted_url=book_info["formattedUrl"],
+            updated_time=datetime.now()
         )
         book.save()
 

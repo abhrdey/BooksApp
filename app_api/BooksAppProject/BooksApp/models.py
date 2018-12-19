@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Books(models.Model):
     cache_id = models.CharField(max_length=20)
@@ -10,6 +11,7 @@ class Books(models.Model):
     image_link = models.TextField()
     thumbnail_link = models.TextField()
     formatted_url = models.TextField()
+    updated_time = models.DateTimeField(default=datetime.now())
 
 class Account(models.Model):
     account_id = models.CharField(max_length=50)
