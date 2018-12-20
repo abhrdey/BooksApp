@@ -16,19 +16,31 @@ class HomeContent extends Component {
             let rowData = []
             for (let index=0; index<numberBooks; index++) {
                 let data = selectedBooks[index]
-                let volumeInfo = data["volumeInfo"]
-                //let pagemap = data["pagemap"]
-                let title = volumeInfo["title"]
-                //let thumbnail = pagemap["cse_thumbnail"][0]
-                //let thumbnailLink = thumbnail["src"]
-                let imageLinks = volumeInfo["imageLinks"]
-                let thumbnailLink = imageLinks["smallThumbnail"]
-                let columnData = (
-                    <Grid.Column key={index}>
-                        <SearchThumbnail imageLink={thumbnailLink} title={title} display="Home" />
-                    </Grid.Column>
-                )
-                rowData.push(columnData)
+                if (data["volumeInfo"]) {
+                    let volumeInfo = data["volumeInfo"]
+                    //let pagemap = data["pagemap"]
+                    let title = volumeInfo["title"]
+                    //let thumbnail = pagemap["cse_thumbnail"][0]
+                    //let thumbnailLink = thumbnail["src"]
+                    let imageLinks = volumeInfo["imageLinks"]
+                    let thumbnailLink = imageLinks["smallThumbnail"]
+                    let columnData = (
+                        <Grid.Column key={index}>
+                            <SearchThumbnail imageLink={thumbnailLink} title={title} display="Home" />
+                        </Grid.Column>
+                    )
+                    rowData.push(columnData)
+                }
+                else {
+                    let title = data["title"]
+                    let thumbnailLink = data["thumbnail_link"]
+                    let columnData = (
+                        <Grid.Column key={index}>
+                            <SearchThumbnail imageLink={thumbnailLink} title={title} display="Home" />
+                        </Grid.Column>
+                    )
+                    rowData.push(columnData)
+                }
             }
             return(
                 <Grid>
